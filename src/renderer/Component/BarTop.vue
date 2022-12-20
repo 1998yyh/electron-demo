@@ -4,6 +4,7 @@ import { ipcRenderer } from "electron";
 defineProps<{ title?: string }>();
 let isMaximized = ref(false);
 let closeWindow = () => {
+  // 通过ipcRenderer.invoke方法来调用主进程CommonWindowEvent类提供的消息管道来实现对应的功能
   ipcRenderer.invoke("closeWindow");
 };
 let maxmizeMainWin = () => {

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, watch } from "vue";
 import { useRoute } from "vue-router";
-import {createDialog} from '../common/Dialog'
+import { createDialog } from "../common/Dialog";
 
 let mainWindowRoutes = ref([
   {
@@ -36,18 +36,20 @@ watch(
   }
 );
 
-let openSettingWindow =async () => {
-  let config = { modal: true, width: 800, webPreferences: { webviewTag: false } };
+let openSettingWindow = async () => {
+  let config = {
+    modal: true,
+    width: 800,
+    webPreferences: { webviewTag: false },
+  };
   let dialog = await createDialog(`/WindowSetting/AccountSetting`, config);
   let msg = { msgName: "hello", value: "msg from your parent" };
   dialog.postMessage(msg);
 };
 
-
 window.addEventListener("message", (e) => {
   console.log(e.data);
 });
-
 </script>
 <template>
   <div class="BarLeft">

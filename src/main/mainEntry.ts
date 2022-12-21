@@ -49,6 +49,8 @@ app.whenReady().then(() => {
     CustomScheme.registerScheme();
     mainWindow.loadURL(`app://index.html`);
   }
+
+  CommonWindowEvent.listen();
 });
 
 // app 和 BrowserWindow 都是 Electron 的内置模块，这些内置模块是通过 ES Module 的形式导入进来的，

@@ -17,6 +17,8 @@ let mainWindow: BrowserWindow;
 
 app.whenReady().then(() => {
   let config = {
+    frame: false,
+    show: false,
     webPreferences: {
       // nodeIntegration配置项的作用是把 Node.js 环境集成到渲染进程中
       nodeIntegration: true,
@@ -28,7 +30,6 @@ app.whenReady().then(() => {
       spellcheck: false,
       disableHtmlFullscreenWindowResize: true,
     },
-    show: false
   }
 
 

@@ -1,34 +1,34 @@
 <script setup lang="ts">
+
 import { ref } from "vue";
+import { ModelChat } from "../../../../model/ModelChat";
 import { useStore } from "../../../store/index";
 import BarTop from "../../../Component/BarTop.vue";
+import MessageItem from './MessageItem.vue'
 
-const { chatStore: store } = useStore();
+const { messageStore } = useStore();
 
-let logInfo = ref("");
-let curId = "";
-
-// 订阅srore内数据变化
-store.$subscribe((mutations, state) => {
-  let item = state.data.find((v) => v.isSelected);
-  let id = item?.id as string;
-  if (id != curId) {
-    logInfo.value = `现在应该加载ID为${item?.id}的聊天记录`;
-    curId = id;
-  }
-});
 </script>
 <template>
   <div class="MessageBord">
-    <BarTop />
-    <div class="MessageList">{{ logInfo }}</div>
+    <BarTop class="topBar" />
+    <div class="MessageList">
+      <MessageItem :data="item" v-for="item in messageStore.data" :key="item.id" />
+    </div>
   </div>
 </template>
 <style scoped lang="scss">
+
 .MessageBord {
-  height: 100%;
+  height: 100vh;
   display: flex;
   flex: 1;
   flex-direction: column;
 }
+.MessageList{
+  height: calc(100vh - 25px);
+  overflow:auto;
+
+}
 </style>
+

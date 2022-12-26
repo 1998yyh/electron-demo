@@ -1,10 +1,13 @@
 import { defineStore } from 'pinia'
 import { Ref, ref } from 'vue'
 import { ModelChat } from '../../model/ModelChat'
+import {useMessageStore} from './useMessageStore'
+
+const messageStore = useMessageStore();
 
 let prepareData = () => {
   let result = [];
-  for (let i = 0; i < 10; i++) {
+  for (let i = 1; i < 10; i++) {
     let model = new ModelChat();
     model.fromName = "聊天对象" + i;
     model.sendTime = "昨天";
@@ -24,6 +27,7 @@ export const useChatStore = defineStore("chat", () => {
   let selectItem = (item: ModelChat) => {
     if (item.isSelected) return;
     data.value.forEach((v) => (v.isSelected = false));
+    messageStore.initData(item)
     item.isSelected = true;
   };
   return { data, selectItem };
